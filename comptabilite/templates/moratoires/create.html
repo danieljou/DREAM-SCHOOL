@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% load crispy_forms_tags %}
+{% block title %}Gestion des Moratoires{% endblock title %}
+{% block help %}Moratoires{% endblock help %}
+{% comment %} 
+{% block index %}Suppréssion du niveau : {{niveau}} {% endblock index %} {% endcomment %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <form action="" method="post" novalidate class="needs-validation">
+                {% csrf_token %}    
+
+                <div class="d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="card p-1 ">
+                            <div class="card-body">
+                                {{form |crispy}}
+
+                                <input type="submit" name="" id="" value="Enregistrer" class="btn btn-success my-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+    
+

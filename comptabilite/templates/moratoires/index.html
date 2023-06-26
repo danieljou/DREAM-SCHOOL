@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block title %}Gestion des Moratoires{% endblock title %}
+{% block help %}Moratoires{% endblock help %}
+
+{% block index %}Moratoires {{niveau}} {% endblock index %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="p-3 card">
+                <div class="card-header">
+                    Liste des moratoires
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-end px-2">
+                        <a href="{% url 'moratoire_create' %}" class="btn btn-primary"> Créer</a>
+                    </div>
+                    <table class="table datatable">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Etudiant</th>
+                            <th scope="col">Matricule</th>
+                            <th scope="col">Classe</th>
+                            <th scope="col">Option</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+      
+                          
+                          {% for item in salles %}
+                              <tr>
+                                  <th scope="row"> {{forloop.counter}} </th>
+                                  <td> {{item.code}} </td>
+                                  <td> {{item.nom}} </td>
+                                  <td> {{item.niveau}} </td>
+                                  <td>
+                                      <!-- {% if not item.is_active %}                                                           
+                                          <a href="" class="btn btn-primary rounded-pill"> Utiliser </a>                                
+                                      {% endif %} -->
+                                      <a href="{% url 'updatesalle' item.id %}" class="btn btn-warning rounded-pill"> <i class="fa fa-pen "></i> </a>  
+                                      <a href="{% url 'deletesalle' item.id %}" class="btn btn-danger rounded-pill"> <i class="fa fa-trash "></i>  </a>  
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+

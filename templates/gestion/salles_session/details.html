@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block title %}Gestion Salles de classes{% endblock title %}
+{% block help %}Gestion{% endblock help %}
+
+{% comment %} {% block index %}Suppréssion du niveau : {{niveau}} {% endblock index %} {% endcomment %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card p-2">
+                    <div class="card-body">
+                        <p>Salle : <strong>{{salle.classe}} </strong></p>
+                        <p>Session : <strong>{{salle.session}} </strong></p>
+                        <p>Niveau : <strong>{{salle.classe.niveau}} </strong></p>
+                        <p>Elèves : <strong>{{salle.get_total_eleves}} </strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table datatable">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom </th>
+                                <th scope="col">Sexe</th>
+                                {% comment %} <th scope="col">Slug</th> {% endcomment %}
+                                <th scope="col">Option</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+          
+                              
+                              {% for item in salle.get_eleves %}
+                                  <tr>
+                                      <th scope="row"> {{forloop.counter}} </th>
+                                      <td> {{item.Nom}} </td>
+                                      <td> {{item.Prenom}} </td>
+                                      <td> {{item.Sexe}} </td>
+                                      {% comment %} <td> {{item.slug}} </td> {% endcomment %}
+                                      <td>  
+                                        <a href="{% url 'eleveDetails' item.Matricule %}" class="btn btn-primary ">Voir plus</i> </a>                                
+                                        <a href="{% url 'eleveUpdate' item.Matricule %}" class="btn btn-warning rounded-pill"> <i class="fa fa-pen "></i> </a>  
+                                        <a href="{% url 'deletematiere_coef' item.id %}" class="btn btn-danger rounded-pill"> <i class="fa fa-trash "></i>  </a>  
+                                    </td>
+                                  </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+

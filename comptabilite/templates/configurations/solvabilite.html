@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+
+{% block title %}Comptabilité{% endblock title %}
+{% block help %} Solvabilité {% endblock help %}
+
+{% block index %}  {{session_active}} {% endblock index %}
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                {% if not session_active %}
+
+                <h2>Aucune session n'est active</h2>
+                {% else %}
+
+                    
+                <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">Nom </th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Classe</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Option</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+  
+                      
+                      {% for item in eleves %}
+                          <tr>
+                              <th scope="row"> {{forloop.counter}} </th>
+                              <td> {{item.Matricule}} </td>
+                              <td> {{item.Nom}} </td>
+                              <td> {{item.Prenom}} </td>
+                              <td> {{item.classe.classe}} </td>
+                              <td> 
+                                <div class="badge bg-success">Solvable</div> 
+                            </td>
+                              <td>  <a href="{% url 'compta_paiement_details' item.Matricule %}" class="btn btn-primary   ">Détails</a> </td>
+                          </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                        
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
+

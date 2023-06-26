@@ -1,0 +1,138 @@
+{% extends 'index.html' %}
+
+
+{% block title %}Gestion des salles de classe par session{% endblock title %}
+{% block help %}Session active {{session_active}}  {% endblock help %}
+
+{% block index %}Salles de classes par session  {% endblock index %}
+    
+    
+    
+
+{% block content %}
+    <hr>
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Liste des salles de classe</h5>  
+                <!-- Table with stripped rows -->
+                <div class="d-flex justify-content-end mb-2">
+                    <a id="addsession" class="btn btn-primary rounded-pill" href="{% url 'createsalle_session' %}">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Salle de classe</th>
+                      <th scope="col">Session </th>
+                      <th scope="col">Niveau</th>
+                      {% comment %} <th scope="col">Slug</th> {% endcomment %}
+                      <th scope="col">Option</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    
+                    {% for item in salles %}
+                        <tr>
+                            <th scope="row"> {{forloop.counter}} </th>
+                            <td> {{item.classe}} </td>
+                            <td> {{item.session}} </td>
+                            <td> {{item.classe.niveau}} </td>
+                            {% comment %} <td> {{item.slug}} </td> {% endcomment %}
+                            <td>
+                                <!-- {% if not item.is_active %}                                                           
+                                    <a href="" class="btn btn-primary rounded-pill"> Utiliser </a>                                
+                                    {% endif %} -->
+                                    <a href="{% url 'detailssalle_session' item.id %}" class="btn btn-warning rounded-pill"> <i class="fa fa-eye "></i> </a>  
+                                    <a href="{% url 'deletesalle_session' item.id %}" class="btn btn-danger rounded-pill"> <i class="fa fa-trash "></i>  </a>  
+                                    <a href="{% url 'updatesalle_session' item.id %}" class="btn btn-warning rounded-pill"> <i class="fa fa-pen "></i> </a>  
+                                  </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+
+    
+      <div class="modal fade" id="staticBackdrop" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Ajoutez une session <span id="name"> </span></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="data"></div>
+            </div>
+           
+          </div>
+        </div>
+    </div>
+    
+{% endblock content %}
+
+
+{% block scripts %}
+{% comment %} 
+<script>
+    
+    $('#addsession').on('click',function(){
+       
+        $('#staticBackdrop').modal('show');
+        
+        $.ajax({
+            url: $(this).data('url'),   
+            type: 'get',
+            dataType: 'json',
+            success: function (data){
+                $("#data").html(data.content);
+            },
+            beforeSend:function() {   
+            },
+        });
+
+    });
+
+    $("#btn-submit").on('click', function(){
+        alert()
+    });
+    $('#form-session').submit( function(ev){
+        
+        $('#addsession').on('click',function(){
+       
+            $('#staticBackdrop').modal('show');
+            
+            $.ajax({
+                url: $(this).data('url'),   
+                type: 'get',
+                dataType: 'json',
+                success: function (data){
+                    $("#data").html(data.content);
+                },
+                beforeSend:function() {   
+                },
+            });
+    
+        });
+    });
+    
+</script> {% endcomment %}
+{% endblock scripts %}
+    
+    

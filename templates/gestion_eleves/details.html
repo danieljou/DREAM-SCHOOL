@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Gestion des élèves{% endblock title %}
+{% block help %}Gestion{% endblock help %}
+
+{% block index %}Détails sur l'élève : {% endblock index %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-4">
+
+        <div class="card">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+  
+            
+            {% if etudiant.Photo %}
+                
+            <img src="{{etudiant.Photo.url}}" alt="Profile" class="rounded-circle mb-5" width="150" height="150">
+            {% endif %}
+            
+            <h3 class="text-center"> <hr>{{etudiant.Nom}} {{etudiant.Prenom}}</h3>
+            <h4 class=" text-primary">{{etudiant.Matricule}} </h4>
+            <h5 class="text-success">{{etudiant.classe.classe}} </h5>
+           
+          </div>
+        </div>
+  
+      </div>
+
+      <div class="col-xl-8">
+           <div class="card">
+            <div class="card-body p-2">
+                <div class="details p-4">
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Nom</div>
+                        <div class=""><span>{{etudiant.Nom}}</span></div>
+                    </div>
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Prénom</div>
+                        <div class=""><span>{{etudiant.Prenom}}</span></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Sexe</div>
+                        <div class=""><span>{{etudiant.Sexe}}</span></div>
+                    </div>
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Date de naissance</div>
+                        <div class=""><span>{{etudiant.Date_naiss}}</span></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Lieu de naissance</div>
+                        <div class=""><span>{{etudiant.Lieu_naiss}}</span></div>
+                    </div>
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Quartier</div>
+                        <div class=""><span>{{etudiant.Quartier}}</span></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Age</div>
+                        <div class=""><span>{{etudiant.getAge}} Ans</span></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Parent / Tuteur</div>
+                        <div class=""><span>{{etudiant.Nom_parent}}</span></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between div">
+                        <div class="">Télephone</div>
+                        <div class=""><span>{{etudiant.Telephone}}</span></div>
+                    </div>
+                    
+
+                </div>
+            </div>
+           </div>
+
+      </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body p-3">
+                    <p class="h4">Gestion</p>
+                    <a href="{% url 'eleveUpdate' etudiant.Matricule %}">Modifier les informations </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .details span{
+        font-weight: bold;
+    }
+    .div{
+        margin-bottom: 7px;
+    }
+</style>
+{% endblock content %}
+

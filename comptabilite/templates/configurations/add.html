@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}Comptabilité{% endblock title %}
+{% block help %}Configuration des paies | ajout d'une echéance {% endblock help %}
+
+{% block index %}  {{session_active}} {% endblock index %}
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+        <div class="col-8 p3">
+            <div class="card p3">
+                <div class="card-body p3">
+                    <form action="" method="post" novalidate class="needs-validation p3 my-3">
+                        {% csrf_token %}
+                        {{form | crispy}}
+                        <input type="submit" value="Enregistrer" class="btn btn-success my-2">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
+

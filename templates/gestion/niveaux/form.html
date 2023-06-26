@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Gestion des session{% endblock title %}
+{% block help %}Gestion{% endblock help %}
+
+{% block index %}Création d'une session{% endblock index %}
+
+
+{% block content %}
+    
+    
+<div class="d-flex justify-content-center">
+        <div class="col-6">
+            <div class=" card py-2">
+                <div class="card-body">
+                    <form method="post" novalidate id="form-session"class="my-6 needs-validation" >
+                        {% csrf_token %}
+                        {{form | crispy}}
+                        <input type="submit" class="btn btn-primary my-3" value="Enregistrer" id="btn-submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock content %}
+    
+    

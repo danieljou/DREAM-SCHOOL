@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+
+
+{% block title %}Gestion des élèves{% endblock title %}
+{% block help %}Gestion{% endblock help %}
+
+{% block index %}Elèves{% endblock index %}
+
+{% block content %}
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Liste des matières</h5>  
+            <!-- Table with stripped rows -->
+            <div class="d-flex justify-content-end mb-2">
+                <a id="addsession" class="btn btn-primary rounded-pill" href="{% url 'eleveAdd' %}">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Matricule </th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  {% comment %} <th scope="col">Slug</th> {% endcomment %}
+                  <th scope="col">Option</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+
+                
+                {% for item in eleves %}
+                    <tr>
+                        <th scope="row"> {{forloop.counter}} </th>
+                        <td> {{item.Matricule}} </td>
+                        <td> 
+                            
+                            {% if item.Photo %}
+                            <div class="studentImage">
+
+                                <img src="{{item.Photo.url}}" alt="Photo" class="rounded-circle" width="50" height="70" style="object-fit: cover;">
+                            </div>
+                                
+                            {% else %}
+                            <!-- <div class="fa fa-user text-secondary h3 text-center rounded-circle bg-primary" ></div> -->
+                            {% endif %}
+                                
+                        </td>
+                        <td> {{item.Nom}} </td>
+                        <td> {{item.Prenom}} </td>
+                        
+
+                        <td>  
+                            <a href="{% url 'eleveDetails' item.Matricule %}" class="btn btn-primary ">Voir plus</i> </a>                                
+                            <a href="{% url 'eleveUpdate' item.Matricule %}" class="btn btn-warning rounded-pill"> <i class="fa fa-pen "></i> </a>  
+                            <a href="{% url 'deletematiere_coef' item.id %}" class="btn btn-danger rounded-pill"> <i class="fa fa-trash "></i>  </a>  
+                        </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+    
+{% endblock content %}
+    

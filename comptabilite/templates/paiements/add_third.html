@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load humanize %}
+
+{% block title %}Comptabilité{% endblock title %}
+{% block help %}Paiements{% endblock help %}
+
+{% block index %}Création{% endblock index %}
+
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+  
+            
+                        {% if eleve.Photo %}
+                            
+                        <img src="{{eleve.Photo.url}}" alt="Profile" class="rounded-circle mb-5" width="150" height="150">
+                        {% endif %}
+                        
+                        <h3 class="text-center"> <hr>{{eleve.Nom}} {{eleve.Prenom}}</h3>
+                        <h4 class=" text-primary">{{eleve.Matricule}} </h4>
+                        <h5 class="text-success">{{eleve.classe.classe}} </h5>
+                       
+                      </div>
+                </div>
+            </div>
+            <div class=" col-md-8">
+              <div class="card">
+                <div class="card-header">
+                    Création d'un paiement | Etape <div class="badge bg-primary">3</div>
+                </div>
+                <div class="card-body">
+
+                    <p>Veullez choisir Entrer le montant de paiement </p>
+
+                    <div class="row">
+                        {% if session_active %}
+                            <form action="" method="post" class="needs-validation" novalidate>
+                                {% csrf_token %}
+                                <div class="group-form">
+                                    <label for="montant">Montant * </label>
+                                    <input type="number" name="montant" class="form-control" required>
+                                    <input type="submit" value="Valider" class="my-3 btn btn-outline-primary">
+                                </div>
+                            </form>
+
+                        {% else %}
+                        <p>Aucune session n'est active ; vous ne pouvez créer de paiement </p>
+
+                        {% endif %}
+                    </div>
+                        
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .details span{
+            font-weight: bold;
+        }
+        .div{
+            margin-bottom: 7px;
+        }
+    </style>
+{% endblock content %}
+    
+

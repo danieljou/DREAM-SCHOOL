@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block title %}Comptabilité{% endblock title %}
+{% block help %}Dashboard{% endblock help %}
+
+{% comment %} {% block index %}Suppréssion du niveau : {{niveau}} {% endblock index %} {% endcomment %}
+
+
+
+{% block content %}
+    <div class="container-fluid">
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>En supprimant cette tranches vous vous engagez à supprimer  :</p>
+
+            <input type="submit" value="supprimer" class="btn btn-danger">
+        </form>
+    </div>
+{% endblock content %}
+    
+

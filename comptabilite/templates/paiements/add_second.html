@@ -1,0 +1,107 @@
+{% extends 'index.html' %}
+{% load humanize %}
+
+{% block title %}Comptabilité{% endblock title %}
+{% block help %}Paiements{% endblock help %}
+
+{% block index %}Création{% endblock index %}
+
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+  
+            
+                        {% if eleve.Photo %}
+                            
+                        <img src="{{eleve.Photo.url}}" alt="Profile" class="rounded-circle mb-5" width="150" height="150">
+                        {% endif %}
+                        
+                        <h3 class="text-center"> <hr>{{eleve.Nom}} {{eleve.Prenom}}</h3>
+                        <h4 class=" text-primary">{{eleve.Matricule}} </h4>
+                        <h5 class="text-success">{{eleve.classe.classe}} </h5>
+                       
+                      </div>
+                </div>
+            </div>
+            <div class=" col-md-8">
+              <div class="card">
+                <div class="card-header">
+                    Création d'un paiement | Etape <div class="badge bg-primary">2</div>
+                </div>
+                <div class="card-body">
+
+                    <p>Veullez choisir la tranche de paiement </p>
+
+                    <div class="row">
+                        {% if session_active %}
+                    
+
+                        {% for item in echeances %}
+                            <div class="col-6">
+                                <div class="card p-2">
+                                    <div class="card-body p-2">
+                                        {{item.designation}}
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
+                                                Date de début 
+                                            </div>
+                                            <div class="">
+                    
+                                                <span class="text-primary">{{item.date_debut}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
+                                                Date de fin 
+                                            </div>
+                                            <div class="">
+                    
+                                                <span class="text-danger">{{item.date_fin}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
+                                                Montant 
+                                            </div>
+                                            <div class="">
+                                                <span class="badge bg-success">
+                                                    {{item.montant | intcomma}} Fcfa
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <a href="{% url 'compta_payement_add_third' eleve.Matricule item.id %}" class="my-3">Continuer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% else %}
+                        <p>Aucune session n'est active ; vous ne pouvez créer de paiement </p>
+
+                        {% endif %}
+                    </div>
+                        
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .details span{
+            font-weight: bold;
+        }
+        .div{
+            margin-bottom: 7px;
+        }
+    </style>
+{% endblock content %}
+    
+
