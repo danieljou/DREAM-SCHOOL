@@ -19,7 +19,7 @@ Avant d'installer DREAM SCHOOL, assurez-vous d'avoir les logiciels suivants inst
 Tout d'abord, clonez le référentiel DREAM SCHOOL depuis GitHub en utilisant la commande suivante:
 
 ```
-git clone https://github.com/votre-nom-d-utilisateur/dream-school.git
+git clone https://github.com/danieljou/dream-school.git
 ```
 
 ### Étape 2: Créer un environnement virtuel
